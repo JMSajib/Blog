@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="centerstage">
+  {% if user.username %}
+  {% for post in post_list %}
+    {% if post.author == user %}
+    <div class="post">
+      <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+      <div class="date">
+        <p><b>Published on: {{ post.published_date|date:"D M Y"}}</b></p>
+
+      </div>
+      <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+  {% else %}
+    {% for post in post_list %}
+
+    <div class="post">
+      <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+      <div class="date">
+        <p><b>Published on: {{ post.published_date|date:"D M Y"}}</b></p>
+
+      </div>
+      <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
+    </div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}

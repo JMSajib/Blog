@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <div class="container">
+    {% if registered %}
+      <h1>Thank You</h1>
+    {% else %}
+      <h1 style="color:blue;">Register Here</h1>
+      <h2 style="color:green;">Fill Out the Form: </h2>
+      <form class="form-horizontal" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+
+          {{ user_form|crispy }}
+
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </form>
+    {% endif %}
+  </div>
+
+
+{% endblock %}
